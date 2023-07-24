@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <div>
       <div className=' bg-[black] '>
-          <div className='w-[1280px] mx-auto '>
+          <div className='w-[1280px] mx-auto mt-[100px] '>
             <div className='w-[1180px] h-[90px] mx-auto  flex items-center justify-between  text-[white]'>
                   <div className='flex gap-[15px] text-[22px]'>
                       <BiSolidPaperPlane className='text-[30px]'></BiSolidPaperPlane>

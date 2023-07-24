@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiOutlineSearch,
   AiOutlineUser,
@@ -6,13 +6,27 @@ import {
   AiOutlineShoppingCart,
   AiOutlineInstagram,
   AiFillYoutube,
-  AiOutlineTwitter
+  AiOutlineTwitter,
 } from "react-icons/ai";
 import { FaPinterest } from "react-icons/fa";
 import Image from "next/image";
 import { BsArrowLeftRight, BsFacebook } from "react-icons/bs";
 
 export default function Header() {
+  const [today, setToday] = useState(new Date()); // Save the current date to be able to trigger an update
+
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     // Creates an interval which will update the current data every minute
+  //     setToday(new Date());
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
+  //   };
+  // }, []);
+
+
+
   return (
     <div>
       <div className="h-[80px] bg-[#FAA618] flex items-center justify-center gap-[35px]  ">
@@ -22,17 +36,17 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-2">
           <div>
-            <div className="font-bold text-[30px]">63</div>
+            <div className="font-bold text-[30px]">{today.toLocaleTimeString('en-US', { hour: '2-digit', hour12: false})}</div>
             <div className="text-[14px]">Days</div>
           </div>
           <div>:</div>
           <div>
-            <div className="font-bold text-[30px]">8</div>
+            <div className="font-bold text-[30px]">{today.toLocaleTimeString('en-US', { minute: '2-digit'})}</div>
             <div className="text-[14px]">Hsr</div>
           </div>
           <div>:</div>
           <div>
-            <div className="font-bold text-[30px]">27</div>
+            <div className="font-bold text-[30px]">{today.toLocaleTimeString('en-US', { second: '2-digit'})}</div>
             <div className="text-[14px]">Mins</div>
           </div>
         </div>
@@ -108,14 +122,15 @@ export default function Header() {
                 <div className="text-[10px]">WISHLIST</div>
               </div>
               <div className="text-[black]  flex flex-col items-center ">
-                <AiOutlineShoppingCart className="text-[30px] relative">
-                    
-                </AiOutlineShoppingCart>
-                <div className="w-[20px] h-[20px] rounded-[40px] bg-[#EF4444] absolute top-[10px] left-[1165px] text-[white] text-[12px] flex items-center justify-center"> 0</div>
+                <AiOutlineShoppingCart className="text-[30px] relative"></AiOutlineShoppingCart>
+                <div className="w-[20px] h-[20px] rounded-[40px] bg-[#EF4444] absolute top-[10px] left-[1165px] text-[white] text-[12px] flex items-center justify-center">
+                  {" "}
+                  0
+                </div>
                 <div className="text-[10px]">CART</div>
               </div>
             </div>
-          </div>    
+          </div>
         </div>
       </div>
     </div>
