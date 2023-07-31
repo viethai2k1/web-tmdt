@@ -1,41 +1,59 @@
-import React from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import React, { useState } from "react";
+import { AiTwotoneHeart, AiOutlineHeart } from "react-icons/ai";
 import { BsArrowLeftRight } from "react-icons/bs";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
+import Link from "next/link";
+
 export default function Product({ sanPham }) {
+
+  const [thich, setthich] = useState(false);
   console.log(sanPham);
+
   return (
     <div>
       <div>
-        <div className="relative">
-          <img src={sanPham.images[0].src}></img>
-          <div className="w-[45px] h-[22px] text-[13px] bg-[red] text-[white]  absolute flex items-center justify-center top-[20px] right-[10px] rounded-[5px]">
+        <Link href={`/Products/${sanPham.id}`} className="relative">
+          <div
+            className={`flex overflow-hidden ${
+              sanPham.images.length < 2 ? "" : "product_1 "
+            }`}
+          >
+            <img src={sanPham?.images[0]?.src}></img>
+            <img src={sanPham?.images[1]?.src}></img>
+          </div>
+          <div className="w-[45px] h-[22px] text-[13px] bg-[#DC2626] text-[white]  absolute flex items-center justify-center top-[20px] right-[10px] rounded-[5px]">
             Sale
           </div>
-        </div>
+        </Link>
       </div>
       <div className="flex flex-col gap-[10px]">
         <div className="flex items-center justify-between mt-[10px]">
           <div className="text-[15px] text-[gray]">{sanPham?.vendor}</div>
           <div className="flex gap-[10px] text-[22px]">
-            <AiOutlineHeart></AiOutlineHeart>
             <BsArrowLeftRight></BsArrowLeftRight>
+            <div className="" onClick={() => {setthich(!thich)}}>
+             {thich? <AiTwotoneHeart className="text-[black]"></AiTwotoneHeart>:<AiOutlineHeart></AiOutlineHeart> } 
+            </div>
           </div>
         </div>
-        <div className="flex text-[22px] gap-[3px]">
-          <AiOutlineStar></AiOutlineStar>
-          <AiOutlineStar></AiOutlineStar>
-          <AiOutlineStar></AiOutlineStar>
-          <AiOutlineStar></AiOutlineStar>
-          <AiOutlineStar></AiOutlineStar>
+        <div className="flex text-[18px] gap-[3px]">
+          <AiFillStar className="text-[#FFA500]"></AiFillStar>
+          <AiFillStar className="text-[#FFA500]"></AiFillStar>
+          <AiFillStar className="text-[#FFA500]"></AiFillStar>
+          <AiFillStar className="text-[#FFA500]"></AiFillStar>
+          <AiFillStar className="text-[#FFA500]"></AiFillStar>
         </div>
-        <div className="text-[18px] font-semibold">
-            {sanPham.title}
-        </div>
-        <div className="flex gap-[10px]">
-          <del className="text-[gray]">$130</del>
-          <div className="text-[red] font-bold">$100.00</div>
-        </div>
+        <div className="text-[16px] font-semibold">{sanPham.title}</div>
+        {sanPham.variants && (
+          <div className="flex gap-[10px]">
+            <del className="text-[gray]">
+              {sanPham.variants[0].compare_at_price}
+            </del>
+            <div className="text-[#DC2626] font-bold">
+              {sanPham.variants[0].price}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

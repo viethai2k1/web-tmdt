@@ -13,7 +13,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import Product from "../components/Product";
-export default function Home({ sanPhamsTraVe }) {
+import Link from "next/link";
+export default function Home({ sanPhamsTraVe, collecttion }) {
   return (
     <Layout>
       <div>
@@ -21,7 +22,10 @@ export default function Home({ sanPhamsTraVe }) {
           <div className=" w-[1280px]  mx-auto">
             <div className=" w-[1180px] h-[60px] mx-auto flex items-center justify-between text-[white]">
               <div className="flex gap-[40px]">
-                <div>Home</div>
+                <div className={`overflow-hidden sanpham_2`}>
+                  <div>Home</div>
+                  <div>Home</div>
+                </div>
                 <div>Women</div>
                 <div>Men</div>
                 <div>Accessories</div>
@@ -53,13 +57,33 @@ export default function Home({ sanPhamsTraVe }) {
             // onSwiper={(swiper) => console.log(swiper)}
           >
             <SwiperSlide>
-              <div>
-                <img className="w-[100%] " src="/img/anh19.webp"></img>
+              <div className="relative">
+                <img
+                  className="w-[100%] h-[500px] "
+                  src="/img/anh19.webp"
+                ></img>
+                <div className="absolute top-[50px] left-[110px] text-[white] ">
+                  <div className="text-[20px] font-medium">NIKE AIR</div>
+                  <div className="text-[60px] font-bold w-[280px]">NIKE AIR FOR 2023</div>
+                  <div className="w-[500px] font-bold text-[18px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse finibus felis in egestas cursus</div>
+                  <button className="w-[200px] h-[50px] bg-[red] text-[white] mt-[20px]">VIEW MORE</button>
+                </div>
               </div>
+
             </SwiperSlide>
             <SwiperSlide>
               <div>
-                <img className="w-[100%] " src="/img/anh20.webp"></img>
+                <img
+                  className="w-[100%] h-[500px] "
+                  src="/img/anh20.webp"
+                ></img>
+                 <div className="absolute top-[50px] right-[160px] text-[white] ">
+                    <div className="text-[20px] font-medium">NIKE AIR</div>
+                    <div className="text-[60px] font-bold w-[400px]">NEW SHOES FOR 2023</div>
+                    <div className="w-[500px] font-bold text-[18px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse finibus felis in egestas cursus</div>
+                    <button className="w-[200px] h-[50px] bg-[yellow] text-[white] mt-[20px]">SHOW NOW</button>
+                </div>
+
               </div>
             </SwiperSlide>
           </Swiper>
@@ -73,23 +97,19 @@ export default function Home({ sanPhamsTraVe }) {
               </div>
             </div>
             <div className="w-[1180px] mx-auto">
-              <div className="w-[100%] mx-auto  flex gap-[25px]">
-                <div className=" w-[25%]">
-                  <img className="h-[280px]" src="/img/anh01.webp"></img>
-                  <div className="ml-[80px]">Women Shoes</div>
-                </div>
-                <div className=" w-[25%]">
-                  <img className="h-[280px]" src="/img/anh04.webp"></img>
-                  <div className="ml-[80px]">Men Shoes</div>
-                </div>
-                <div className=" w-[25%]">
-                  <img className="h-[280px]" src="/img/anh03.webp"></img>
-                  <div className="ml-[80px]">Kid Shoes</div>
-                </div>
-                <div className=" w-[25%]">
-                  <img className="h-[280px]" src="/img/anh04.webp"></img>
-                  <div className="ml-[80px]">Accessories</div>
-                </div>
+              <div className="w-[100%] mx-auto grid grid-cols-4 gap-4">
+                {collecttion.map((item) => {
+                  return (
+                    <Link
+                      href={`/Collections/${item.collection_id}?name=${item.title}`}
+                      key={item.collection_id}
+                      className=""
+                    >
+                      <img className="" src={item.image.src}></img>
+                      <div className="text-center font-bold">{item.title}</div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -107,27 +127,24 @@ export default function Home({ sanPhamsTraVe }) {
           </div>
           <div className="w-[1280px] mx-auto mt-[20px]">
             <div className="w-[1180px] mx-auto">
-                <Swiper
-                  modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  navigation
-                  pagination={{ clickable: true }}
-                  scrollbar={{ draggable: true }}
-                  
-                >
-                  <div className="mt-[20px] w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {sanPhamsTraVe.map((sanPham) => {
-                            return(
-                              <SwiperSlide>
-                                <Product sanPham={sanPham} />
-                              </SwiperSlide>
-                            );
-                    })}
-                  </div> 
-                </Swiper>
+              <Swiper
+                modules={[Navigation, Scrollbar, A11y, Autoplay]}
+                spaceBetween={20}
+                slidesPerView={4}
+                navigation
+                scrollbar={{ draggable: true }}
+              >
+                <div className="mt-[20px] w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {sanPhamsTraVe.map((sanPham) => {
+                    return (
+                      <SwiperSlide>
+                        <Product sanPham={sanPham} />
+                      </SwiperSlide>
+                    );
+                  })}
+                </div>
+              </Swiper>
             </div>
-            
           </div>
         </div>
         <div className="mt-[70px] w-[1280px] mx-auto">
@@ -143,7 +160,6 @@ export default function Home({ sanPhamsTraVe }) {
           </div>
         </div>
 
-
         <div className="w-[1280px] mx-auto mt-[80px]">
           <div className="w-[1180px] mx-auto">
             <div className="flex justify-between mt-[20px]">
@@ -154,30 +170,30 @@ export default function Home({ sanPhamsTraVe }) {
         </div>
         <div className="w-[1280px] mx-auto mt-[20px]">
           <div className="w-[1180px] mx-auto flex gap-[20px] ">
-            <img className="w-[160px] h-[220px] object-cover" src="/img/anh26.webp"></img>
-            
+            <img
+              className="w-[160px] h-[220px] object-cover"
+              src="/img/anh26.webp"
+            ></img>
+
             <Swiper
-              modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+              modules={[Navigation, Scrollbar, A11y, Autoplay]}
               spaceBetween={20}
               slidesPerView={4}
               navigation
-              pagination={{ clickable: true }}
               scrollbar={{ draggable: true }}
             >
-            <div className="w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {sanPhamsTraVe.map((sanPham) => {
-                return (
-                  <SwiperSlide>
-                    <Product sanPham={sanPham} />
-                  </SwiperSlide>
-                );
-              })}
-            </div>
-          </Swiper>
-
+              <div className="w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {sanPhamsTraVe.map((sanPham) => {
+                  return (
+                    <SwiperSlide>
+                      <Product sanPham={sanPham} />
+                    </SwiperSlide>
+                  );
+                })}
+              </div>
+            </Swiper>
           </div>
         </div>
-    
 
         <div className="w-[1280px] mx-auto mt-[100px]">
           <div className="w-[1180px] mx-auto">
@@ -189,27 +205,28 @@ export default function Home({ sanPhamsTraVe }) {
         </div>
         <div className="w-[1280px] mx-auto mt-[20px]">
           <div className="w-[1180px] mx-auto flex gap-[20px] ">
-            <img className="w-[160px] h-[220px] object-cover" src="/img/anh27.webp"></img>
-            
-            <Swiper
-            modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-            spaceBetween={20}
-            slidesPerView={4}
-            navigation
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
-          >
-            <div className="w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {sanPhamsTraVe.map((sanPham, index) => {
-                return (
-                  <SwiperSlide>
-                    <Product sanPham={sanPham} />
-                  </SwiperSlide>
-                );
-              })}
-            </div>
-          </Swiper>
+            <img
+              className="w-[160px] h-[220px] object-cover"
+              src="/img/anh27.webp"
+            ></img>
 
+            <Swiper
+              modules={[Navigation, Scrollbar, A11y, Autoplay]}
+              spaceBetween={20}
+              slidesPerView={4}
+              navigation
+              scrollbar={{ draggable: true }}
+            >
+              <div className="w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {sanPhamsTraVe.map((sanPham) => {
+                  return (
+                    <SwiperSlide>
+                      <Product sanPham={sanPham} />
+                    </SwiperSlide>
+                  );
+                })}
+              </div>
+            </Swiper>
           </div>
         </div>
         <div className="w-[1280px] mx-auto mt-[80px]">
@@ -277,7 +294,10 @@ export default function Home({ sanPhamsTraVe }) {
             <div className="w-[1180px] mt-[10px]">
               <div className="w-[100%] flex gap-[25px]">
                 <div className="w-[25%]">
-                  <img className="h-[180px] w-[280px]" src="/img/anh08.webp"></img>
+                  <img
+                    className="h-[180px] w-[280px]"
+                    src="/img/anh08.webp"
+                  ></img>
                   <div className="flex justify-between text-[14px] text-[#4B5563] mt-[10px] ">
                     <div>Demo Owen v1 Admin</div>
                     <div>|</div>
@@ -292,7 +312,10 @@ export default function Home({ sanPhamsTraVe }) {
                   </div>
                 </div>
                 <div className="w-[25%]">
-                  <img className="h-[180px] w-[280px]" src="/img/anh28.webp"></img>
+                  <img
+                    className="h-[180px] w-[280px]"
+                    src="/img/anh28.webp"
+                  ></img>
                   <div className="flex justify-between text-[14px] text-[#4B5563] mt-[10px]">
                     <div>Demo Owen v1 Admin</div>
                     <div>|</div>
@@ -307,7 +330,10 @@ export default function Home({ sanPhamsTraVe }) {
                   </div>
                 </div>
                 <div className="w-[25%]">
-                  <img className="h-[180px] w-[280px] " src="/img/anh18.webp"></img>
+                  <img
+                    className="h-[180px] w-[280px] "
+                    src="/img/anh18.webp"
+                  ></img>
                   <div className="flex justify-between text-[14px] text-[#4B5563] mt-[10px]">
                     <div>Demo Owen v1 Admin</div>
                     <div>|</div>
@@ -322,7 +348,10 @@ export default function Home({ sanPhamsTraVe }) {
                   </div>
                 </div>
                 <div className="w-[25%]">
-                  <img  className="h-[180px] w-[280px] " src="/img/anh29.webp"></img>
+                  <img
+                    className="h-[180px] w-[280px] "
+                    src="/img/anh29.webp"
+                  ></img>
                   <div className="flex justify-between text-[14px] text-[#4B5563] mt-[10px]">
                     <div>Demo Owen v1 Admin</div>
                     <div>|</div>
@@ -354,5 +383,22 @@ export const getStaticProps = async () => {
     }
   );
   const responseJson = await response.json();
-  return { props: { sanPhamsTraVe: responseJson.products } };
+
+  const collecttion = await fetch(
+    "https://panofrontendstore.myshopify.com/admin/api/2023-07/collection_listings.json",
+    {
+      headers: {
+        "X-Shopify-Access-Token": "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",
+      },
+    }
+  ).then((res) => res.json());
+
+  console.log(collecttion);
+
+  return {
+    props: {
+      sanPhamsTraVe: responseJson.products,
+      collecttion: collecttion.collection_listings,
+    },
+  };
 };

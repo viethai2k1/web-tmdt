@@ -11,22 +11,10 @@ import {
 import { FaPinterest } from "react-icons/fa";
 import Image from "next/image";
 import { BsArrowLeftRight, BsFacebook } from "react-icons/bs";
+import Link from "next/link";
 
 export default function Header() {
-  const [today, setToday] = useState(new Date()); // Save the current date to be able to trigger an update
-
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     // Creates an interval which will update the current data every minute
-  //     setToday(new Date());
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
-  //   };
-  // }, []);
-
-
-
+  const [yeuthich, setyeuthich] = useState(false);
   return (
     <div>
       <div className="h-[80px] bg-[#FAA618] flex items-center justify-center gap-[35px]  ">
@@ -36,22 +24,22 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-2">
           <div>
-            <div className="font-bold text-[30px]">{today.toLocaleTimeString('en-US', { hour: '2-digit', hour12: false})}</div>
+            <div className="font-bold text-[30px]">33</div>
             <div className="text-[14px]">Days</div>
           </div>
           <div>:</div>
           <div>
-            <div className="font-bold text-[30px]">{today.toLocaleTimeString('en-US', { minute: '2-digit'})}</div>
+            <div className="font-bold text-[30px]">22</div>
             <div className="text-[14px]">Hsr</div>
           </div>
           <div>:</div>
           <div>
-            <div className="font-bold text-[30px]">{today.toLocaleTimeString('en-US', { second: '2-digit'})}</div>
+            <div className="font-bold text-[30px]">3</div>
             <div className="text-[14px]">Mins</div>
           </div>
         </div>
         <div className="w-[250px] h-[50px] text-[white] bg-[#D20808] flex items-center justify-center rounded-[5px]">
-          CODE: CLIQUEFRIENDLY{" "}
+          CODE: CLIQUEFRIENDLY
         </div>
       </div>
       <div className=" bg-[#E5E7EB]">
@@ -80,12 +68,12 @@ export default function Header() {
       <div className="bg-[white]">
         <div className="w-[1280px] mx-auto">
           <div className="h-[80px] w-[1180px] mx-auto bg-[white] flex items-center justify-end relative gap-[25px]">
-            <div>
+            <Link href="http://localhost:3000/">
               <img
                 className="w-[120px] absolute left-0 top-[20px] "
                 src="https://demo.shopifyhydrogen.io/sanity/9aa18a302f43fda497243b7f3470fc9098e83683-1765x515.svg?width=1765&height=515&crop=center"
               ></img>
-            </div>
+            </Link>
             <div className=" relative">
               <button className="flex items-center justify-center absolute w-[35px] h-[35px] rounded-[50px] bg-[#F59E0B] right-[10px] top-[5px]">
                 <AiOutlineSearch className="text-black text-[25px]"></AiOutlineSearch>
@@ -121,13 +109,31 @@ export default function Header() {
                 <AiOutlineHeart className="text-[30px]"></AiOutlineHeart>
                 <div className="text-[10px]">WISHLIST</div>
               </div>
-              <div className="text-[black]  flex flex-col items-center ">
-                <AiOutlineShoppingCart className="text-[30px] relative"></AiOutlineShoppingCart>
-                <div className="w-[20px] h-[20px] rounded-[40px] bg-[#EF4444] absolute top-[10px] left-[1165px] text-[white] text-[12px] flex items-center justify-center">
-                  {" "}
-                  0
+              <div className="">
+                <div
+                  className="text-[black]  flex flex-col items-center"
+                  onClick={() => {
+                    setyeuthich(true);
+                  }}
+                >
+                  <AiOutlineShoppingCart className="text-[30px] relative giohang"></AiOutlineShoppingCart>
+                  <div className="w-[20px] h-[20px] rounded-[40px] bg-[#EF4444] absolute top-[10px] left-[1165px] text-[white] text-[12px] flex items-center justify-center">
+                    {" "}
+                    0
+                  </div>
+                  <div className="text-[10px]">CART</div>
                 </div>
-                <div className="text-[10px]">CART</div>
+                {yeuthich && (
+                  <div
+                    className="bg-[gray] w-[500px] h-[100%]"
+                    onClick={() => {
+                      setyeuthich(false);
+                    }}
+                    
+                  >
+                    <buton onClick= {() => {setyeuthich(false)}}>Đóng</buton>
+                  </div>
+                )}
               </div>
             </div>
           </div>

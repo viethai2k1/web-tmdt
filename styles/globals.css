@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.product_1 img{
+    transition: all 0.5s;
+}
+
+.product_1:hover img{
+  transform: translateX(-100%);
+}
+
+.sanpham_2 div {
+  transition: all 0.5s;
+}
+
+.sanpham_2:hover div{
+  transform: translateY(-100%);
+}
