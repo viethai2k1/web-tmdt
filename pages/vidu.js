@@ -21,14 +21,15 @@ export default function vidu() {
             setShowGioHang(false);
           }}
         >
-          {/* <button
+          <button
             onClick={() => {
               setShowGioHang(false);
             }}
             className="bg-blue-500 shadow rounded px-4 py-2 font-medium text-white"
           >
             Tắt giỏ hàng
-          </button> */}
+          </button>
+          
         </div>
       )}
     </div>

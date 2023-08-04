@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar, A11y, Autoplay } from "swiper/modules";
 import Layout from "../../components/Layout";
@@ -9,12 +9,13 @@ import { BsArrowLeftRight } from "react-icons/bs";
 import { AiOutlineShareAlt } from "react-icons/ai";
 import { IconName } from "react-icons/ai";
 import Product from "../../components/Product";
+import Cart from "../../components/Cart";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
 export default function id({ thamSo1, thamSo2 }) {
-  console.log(thamSo1);
+  const [addtobag, setaddtobag] = useState(false);
   return thamSo1.product ? (
     <div>
       <Layout>
@@ -78,9 +79,17 @@ export default function id({ thamSo1, thamSo2 }) {
                       {thamSo1.product.variants[0].price}
                     </div>
                     <div className="flex flex-col gap-[20px] mt-[20px]">
-                      <button className="w-[350px] h-[50px] bg-[black] text-[white] rounded-[5px] font-medium">
+                      <button
+                        onClick={() => {
+                          setaddtobag(true);
+                        }}
+                        className="w-[350px] h-[50px] bg-[black] text-[white] rounded-[5px] font-medium"
+                      >
                         Add to Bag
                       </button>
+                      {addtobag && (
+                        <Cart products={thamSo2} setClose={setaddtobag} />
+                      )}
                       <button className="w-[350px] h-[50px] bg-[blue] text-[white] flex rounded-[5px] items-center justify-center gap-[10px]">
                         <div className="text-[22px] font-semibold">shop</div>
                         <div className="w-[50px] h-[24px] bg-[white] rounded-[5px] text-[14px] text-[blue]">
@@ -121,6 +130,14 @@ export default function id({ thamSo1, thamSo2 }) {
             </div>
             <div className="w-[1280px] mx-auto">
               <div className="w-[1180px] mx-auto">
+                <div
+                  className="list-disc"
+                  dangerouslySetInnerHTML={{
+                    __html: thamSo1.product.body_html,
+                  }}
+                ></div>
+              </div>
+              {/* <div className="w-[1180px] mx-auto">
                 <div className="flex justify-between items-end">
                   <div className="text-[18px] font-bold">PRODUCT DETAILS</div>
                   <div>X</div>
@@ -195,7 +212,7 @@ export default function id({ thamSo1, thamSo2 }) {
                   that split-second advantage arm you with the ultimate sneakers
                   to walk off the court victorious.
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="w-[1280px] mx-auto">
               <div className="w-[1180px] mx-auto">

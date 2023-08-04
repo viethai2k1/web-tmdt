@@ -12,9 +12,21 @@ import { FaPinterest } from "react-icons/fa";
 import Image from "next/image";
 import { BsArrowLeftRight, BsFacebook } from "react-icons/bs";
 import Link from "next/link";
+import Product from "./Product";
+import Cart from "./Cart";
 
 export default function Header() {
   const [yeuthich, setyeuthich] = useState(false);
+  const [thamSo3, setThamSo3] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/all-product")
+      .then((res) => res.json())
+      .then((res) => {
+        setThamSo3(res.products);
+      });
+  }, []);
+
   return (
     <div>
       <div className="h-[80px] bg-[#FAA618] flex items-center justify-center gap-[35px]  ">
@@ -97,10 +109,13 @@ export default function Header() {
               </div>
             </div>
             <div className="flex gap-[10px]">
-              <div className="text-[black] flex flex-col items-center">
+              <Link
+                href="/account/login"
+                className="text-[black] flex flex-col items-center"
+              >
                 <AiOutlineUser className="text-[30px]"></AiOutlineUser>
                 <div className="text-[10px]">ACCOUNT</div>
-              </div>
+              </Link>
               <div className="text-[black] flex flex-col items-center">
                 <BsArrowLeftRight className="text-[30px]"></BsArrowLeftRight>
                 <div className="text-[10px]">COMPARE</div>
@@ -123,17 +138,7 @@ export default function Header() {
                   </div>
                   <div className="text-[10px]">CART</div>
                 </div>
-                {yeuthich && (
-                  <div
-                    className="bg-[gray] w-[500px] h-[100%]"
-                    onClick={() => {
-                      setyeuthich(false);
-                    }}
-                    
-                  >
-                    <buton onClick= {() => {setyeuthich(false)}}>Đóng</buton>
-                  </div>
-                )}
+                {yeuthich && <Cart products={thamSo3} setClose={setyeuthich} />}
               </div>
             </div>
           </div>

@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Product({ sanPham }) {
 
   const [thich, setthich] = useState(false);
-  console.log(sanPham);
+  
 
   return (
     <div>

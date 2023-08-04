@@ -14,7 +14,9 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import Product from "../components/Product";
 import Link from "next/link";
+import { useState } from "react";
 export default function Home({ sanPhamsTraVe, collecttion }) {
+  const [gach, setGach] = useState("Men");
   return (
     <Layout>
       <div>
@@ -22,18 +24,17 @@ export default function Home({ sanPhamsTraVe, collecttion }) {
           <div className=" w-[1280px]  mx-auto">
             <div className=" w-[1180px] h-[60px] mx-auto flex items-center justify-between text-[white]">
               <div className="flex gap-[40px]">
-                <div className={`overflow-hidden sanpham_2`}>
-                  <div>Home</div>
-                  <div>Home</div>
-                </div>
-                <div>Women</div>
-                <div>Men</div>
-                <div>Accessories</div>
-                <div>Pages</div>
-                <div>FAQs</div>
-                <div>About Us</div>
-                <div>Blog</div>
-                <div>Contact</div>
+                {collecttion.map((item) => {
+                  return (
+                    <Link
+                      href={`/Collections/${item.collection_id}?name=${item.title}`}
+                      key={item.collection_id}
+                      className=""
+                    >
+                      <div>{item.title}</div>
+                    </Link>
+                  );
+                })}
               </div>
               <div className="flex items-center justify-center gap-[12px]">
                 <BsTruck className="text-[25px]"></BsTruck>
@@ -64,12 +65,18 @@ export default function Home({ sanPhamsTraVe, collecttion }) {
                 ></img>
                 <div className="absolute top-[50px] left-[110px] text-[white] ">
                   <div className="text-[20px] font-medium">NIKE AIR</div>
-                  <div className="text-[60px] font-bold w-[280px]">NIKE AIR FOR 2023</div>
-                  <div className="w-[500px] font-bold text-[18px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse finibus felis in egestas cursus</div>
-                  <button className="w-[200px] h-[50px] bg-[red] text-[white] mt-[20px]">VIEW MORE</button>
+                  <div className="text-[60px] font-bold w-[280px]">
+                    NIKE AIR FOR 2023
+                  </div>
+                  <div className="w-[500px] font-bold text-[18px]">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse finibus felis in egestas cursus
+                  </div>
+                  <button className="w-[200px] h-[50px] bg-[red] text-[white] mt-[20px]">
+                    VIEW MORE
+                  </button>
                 </div>
               </div>
-
             </SwiperSlide>
             <SwiperSlide>
               <div>
@@ -77,13 +84,19 @@ export default function Home({ sanPhamsTraVe, collecttion }) {
                   className="w-[100%] h-[500px] "
                   src="/img/anh20.webp"
                 ></img>
-                 <div className="absolute top-[50px] right-[160px] text-[white] ">
-                    <div className="text-[20px] font-medium">NIKE AIR</div>
-                    <div className="text-[60px] font-bold w-[400px]">NEW SHOES FOR 2023</div>
-                    <div className="w-[500px] font-bold text-[18px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse finibus felis in egestas cursus</div>
-                    <button className="w-[200px] h-[50px] bg-[yellow] text-[white] mt-[20px]">SHOW NOW</button>
+                <div className="absolute top-[50px] right-[160px] text-[white] ">
+                  <div className="text-[20px] font-medium">NIKE AIR</div>
+                  <div className="text-[60px] font-bold w-[400px]">
+                    NEW SHOES FOR 2023
+                  </div>
+                  <div className="w-[500px] font-bold text-[18px]">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse finibus felis in egestas cursus
+                  </div>
+                  <button className="w-[200px] h-[50px] bg-[yellow] text-[white] mt-[20px]">
+                    SHOW NOW
+                  </button>
                 </div>
-
               </div>
             </SwiperSlide>
           </Swiper>
@@ -93,7 +106,9 @@ export default function Home({ sanPhamsTraVe, collecttion }) {
             <div className="w-[1180px]  mx-auto">
               <div className="flex justify-between items-center h-[60px]">
                 <div className="text-[22px] font-bold">SHOP BY CATEGORIES</div>
-                <u>View All</u>
+                  {/* <Link href="http://localhost:3000/"> */}
+                    <u>View All</u>
+                  {/* </Link>  */}
               </div>
             </div>
             <div className="w-[1180px] mx-auto">
@@ -119,9 +134,39 @@ export default function Home({ sanPhamsTraVe, collecttion }) {
             <div className="flex justify-between">
               <div className="text-[22px] font-bold">FEATURED PRODUCTS</div>
               <div className="flex gap-[15px]">
-                <div>Men</div>
+                {/* <div>Men</div>
                 <div>Women</div>
-                <div>Accessories</div>
+                <div>Accessories</div> */}
+                <div
+                  style={{
+                    borderBottom: gach === "Men" ? "2px solid" : "none",
+                    color: gach === "Men" ? "black" : "gray",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setGach("Men")}
+                >
+                  Men
+                </div>
+                <div
+                  style={{
+                    borderBottom: gach === "Women" ? "2px solid" : "none",
+                    color: gach === "Women" ? "black" : "gray",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setGach("Women")}
+                >
+                  Women
+                </div>
+                <div
+                  style={{
+                    borderBottom: gach === "Accessories" ? "2px solid" : "none",
+                    color: gach === "Accessories" ? "black" : "gray",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setGach("Accessories")}
+                >
+                  Accessories
+                </div>
               </div>
             </div>
           </div>
@@ -373,6 +418,7 @@ export default function Home({ sanPhamsTraVe, collecttion }) {
     </Layout>
   );
 }
+
 export const getStaticProps = async () => {
   const response = await fetch(
     "https://panofrontendstore.myshopify.com/admin/api/2023-07/products.json",
@@ -382,7 +428,10 @@ export const getStaticProps = async () => {
       },
     }
   );
+
   const responseJson = await response.json();
+  console.log(responseJson)
+  
 
   const collecttion = await fetch(
     "https://panofrontendstore.myshopify.com/admin/api/2023-07/collection_listings.json",

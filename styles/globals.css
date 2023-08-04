@@ -17,3 +17,16 @@
 .sanpham_2:hover div{
   transform: translateY(-100%);
 }
+ul,li {
+  list-style-position: inside;
+  list-style: circle;
+}
+
+.hover_1:hover {
+ background-color: black;
+ color: white;
+}
+.hover_2:hover {
+  background-color: black;
+  color: white;
+ }
