@@ -14,6 +14,37 @@ export default function ed({ sanPhamsTraVe, name }) {
 
   return (
     <Layout>
+
+      <div className="w-[1280px] mx-auto">
+        <div className="w-[1180px] mx-auto">
+          <div className="flex justify-between mt-[30px]">
+            <div className="text-[25px] font-semibold">TOP BRANDS</div>
+            <div><u>All Brands</u></div>
+          </div>
+          <div className="grid grid-cols-5 gap-4 my-[20px]">
+            <div className="flex flex-col text-center gap-[10px]">
+              <img src="/img/anh07.webp"></img>
+              <div>Nike</div>
+            </div>
+            <div className="flex flex-col text-center gap-[10px]">
+              <img src="/img/anh09.webp"></img>
+              <div>Adidas</div>
+            </div>
+            <div className="flex flex-col text-center gap-[10px]">
+              <img src="/img/anh11.webp"></img>
+              <div>New Balance</div>
+            </div>
+            <div className="flex flex-col text-center gap-[10px]">
+              <img src="/img/anh15.webp"></img>
+              <div>Puma</div>
+            </div>
+            <div className="flex flex-col text-center gap-[10px]">
+              <img src="/img/anh34.webp"></img>
+              <div>Reebok</div>
+            </div>         
+          </div>
+        </div>
+      </div>
       <div className="w-[1280px] mx-auto]">
         <div className="w-[1180px] mx-auto flex justify-end relative ">
           <button
@@ -49,7 +80,7 @@ export default function ed({ sanPhamsTraVe, name }) {
           )}
         </div>
       </div>
-      <div className="w-[1280px] mx-auto ">
+      <div className="w-[1280px] mx-auto mt-[30px] ">
         <div className="w-[1180px] mx-auto"></div>
       </div>
       <div className="w-[1280px mx-auto] flex">
@@ -250,13 +281,13 @@ export default function ed({ sanPhamsTraVe, name }) {
             </div>
           </div>
           <div className="w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {sanPhamsTraVe.map((sp) => {
-              return <Product sanPham={sp}></Product>;
+            {sanPhamsTraVe.map((sp ,index) => {
+              return <Product key={index} sanPham={sp}></Product>;
             })}
           </div>
         </div>
       </div>
-      <div className="mt-[100px]">Hải</div>
+      
     </Layout>
   );
 }

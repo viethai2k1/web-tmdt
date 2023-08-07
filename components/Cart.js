@@ -30,8 +30,17 @@ export default function Cart({ products, setClose }) {
         </button>
         <div className="mt-[20px]">Shop Best Sellers</div>
         <div className="grid grid-cols-2 gap-4">
-          {products.slice(0, 4).map((sanPham) => {
-            return <Product sanPham={sanPham}></Product>;
+          {products.map((sanPham) => {
+            
+            return(
+              <div>
+                <Product  sanPham={sanPham}></Product>
+                <button className="rounded w-[180px] h-[40px] border-[1px] border-[gray] mt-4">Add to Bag</button>
+
+              </div>
+
+            ); 
+            
           })}
         </div>
       </div>

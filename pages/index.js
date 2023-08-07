@@ -93,7 +93,7 @@ export default function Home({ sanPhamsTraVe, collecttion }) {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Suspendisse finibus felis in egestas cursus
                   </div>
-                  <button className="w-[200px] h-[50px] bg-[yellow] text-[white] mt-[20px]">
+                  <button className="w-[200px] h-[50px] bg-[#FFA500] text-[white] mt-[20px]">
                     SHOW NOW
                   </button>
                 </div>
@@ -180,9 +180,9 @@ export default function Home({ sanPhamsTraVe, collecttion }) {
                 scrollbar={{ draggable: true }}
               >
                 <div className="mt-[20px] w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {sanPhamsTraVe.map((sanPham) => {
+                  {sanPhamsTraVe.map((sanPham, index) => {
                     return (
-                      <SwiperSlide>
+                      <SwiperSlide key={index}>
                         <Product sanPham={sanPham} />
                       </SwiperSlide>
                     );
@@ -228,9 +228,9 @@ export default function Home({ sanPhamsTraVe, collecttion }) {
               scrollbar={{ draggable: true }}
             >
               <div className="w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {sanPhamsTraVe.map((sanPham) => {
+                {sanPhamsTraVe.map((sanPham, index) => {
                   return (
-                    <SwiperSlide>
+                    <SwiperSlide key={index}>
                       <Product sanPham={sanPham} />
                     </SwiperSlide>
                   );
@@ -263,9 +263,9 @@ export default function Home({ sanPhamsTraVe, collecttion }) {
               scrollbar={{ draggable: true }}
             >
               <div className="w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {sanPhamsTraVe.map((sanPham) => {
+                {sanPhamsTraVe.map((sanPham, index) => {
                   return (
-                    <SwiperSlide>
+                    <SwiperSlide key={index}>
                       <Product sanPham={sanPham} />
                     </SwiperSlide>
                   );
@@ -430,7 +430,7 @@ export const getStaticProps = async () => {
   );
 
   const responseJson = await response.json();
-  console.log(responseJson)
+
   
 
   const collecttion = await fetch(

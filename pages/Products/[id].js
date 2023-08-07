@@ -6,16 +6,43 @@ import { BsTruck } from "react-icons/bs";
 import { AiFillStar } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsArrowLeftRight } from "react-icons/bs";
-import { AiOutlineShareAlt } from "react-icons/ai";
+import { AiOutlineShareAlt, AiTwotoneHeart } from "react-icons/ai";
 import { IconName } from "react-icons/ai";
 import Product from "../../components/Product";
 import Cart from "../../components/Cart";
+import Link from "next/link";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
 export default function id({ thamSo1, thamSo2 }) {
+  const [thich, setThich] = useState(false);
   const [addtobag, setaddtobag] = useState(false);
+
+  const themvaogiohang = (thamSo1) => {
+    const giohang = localStorage.getItem("giohang");
+
+    // Trong trường hợp chưa có giỏ hàng
+    if (!giohang) {
+      // Tạo giỏ hàng và lưu vào 1 mảng là phần tử là sản phẩm được click
+      localStorage.setItem("giohang", JSON.stringify([thamSo1]));
+    }
+    // Ngược lại đã có giỏ hàng
+    else {
+      // lấy ra giỏ hàng dạng string
+      const giohangCuString = localStorage.getItem("giohang");
+
+      // Đổi giỏ hàng dạng string về dạng mảng
+      const giohangCuJson = JSON.parse(giohangCuString);
+
+      // Push sản phẩm đc click vào giỏ hàng cũ
+      giohangCuJson.push(thamSo1);
+
+      // Lưu giỏ hàng mới sau khi push sản phẩm vào localStorage
+      localStorage.setItem("giohang", JSON.stringify(giohangCuJson));
+    }
+  };
+
   return thamSo1.product ? (
     <div>
       <Layout>
@@ -45,7 +72,9 @@ export default function id({ thamSo1, thamSo2 }) {
           </div>
           <div className="w-[1280px] mx-auto">
             <div className="w-[1180px] mx-auto text-[12px] flex mt-[20px] gap-[10px]">
-              <div>HOME /</div>
+              <Link href={"http://localhost:3000/"}>
+                <div>HOME /</div>
+              </Link>
               <div>PRODUCTS /</div>
               <div> ANTI-DUST-FILTER-BREATHABLE-3-LAYERS-OF-PURIFYING-7</div>
             </div>
@@ -53,9 +82,9 @@ export default function id({ thamSo1, thamSo2 }) {
               <div className="w-[1180px] mx-auto mt-[30px]">
                 <div className="w-[100%] flex gap-[80px] ">
                   <div className="w-[65%] grid grid-cols-2 gap-4">
-                    {thamSo1.product.images.map((img) => {
+                    {thamSo1.product.images.map((img, index) => {
                       console.log(img);
-                      return <img src={img.src}></img>;
+                      return <img key={index} src={img.src}></img>;
                     })}
                   </div>
                   <div className="w-[30%] flex flex-col gap-[15px]">
@@ -81,7 +110,7 @@ export default function id({ thamSo1, thamSo2 }) {
                     <div className="flex flex-col gap-[20px] mt-[20px]">
                       <button
                         onClick={() => {
-                          setaddtobag(true);
+                          themvaogiohang(thamSo1);
                         }}
                         className="w-[350px] h-[50px] bg-[black] text-[white] rounded-[5px] font-medium"
                       >
@@ -99,7 +128,19 @@ export default function id({ thamSo1, thamSo2 }) {
                     </div>
                     <div className="flex justify-between">
                       <div className="flex gap-[10px] items-center">
-                        <AiOutlineHeart className="text-[25px]"></AiOutlineHeart>
+                        {/* <AiOutlineHeart className="text-[25px]"></AiOutlineHeart> */}
+                        <div
+                          className=""
+                          onClick={() => {
+                            setThich(!thich);
+                          }}
+                        >
+                          {thich ? (
+                            <AiTwotoneHeart className="text-[black] text-[25px]"></AiTwotoneHeart>
+                          ) : (
+                            <AiOutlineHeart className="text-[25px]"></AiOutlineHeart>
+                          )}
+                        </div>
                         <div>WISHLIST</div>
                       </div>
                       <div className="flex gap-[10px] items-center">
@@ -301,10 +342,10 @@ export default function id({ thamSo1, thamSo2 }) {
                   navigation
                   scrollbar={{ draggable: true }}
                 >
-                  {thamSo2.map((sanPham) => {
+                  {thamSo2.map((sanPham, index) => {
                     return (
                       <SwiperSlide>
-                        <Product sanPham={sanPham} />
+                        <Product key={index} sanPham={sanPham} />
                       </SwiperSlide>
                     );
                   })}

@@ -116,14 +116,14 @@ export default function Header() {
                 <AiOutlineUser className="text-[30px]"></AiOutlineUser>
                 <div className="text-[10px]">ACCOUNT</div>
               </Link>
-              <div className="text-[black] flex flex-col items-center">
+              <Link href={"/compare/compare_1"} className="text-[black] flex flex-col items-center">
                 <BsArrowLeftRight className="text-[30px]"></BsArrowLeftRight>
                 <div className="text-[10px]">COMPARE</div>
-              </div>
-              <div className="text-[black] flex flex-col items-center">
+              </Link>
+              <Link href={"/wishlist"} className="text-[black] flex flex-col items-center">
                 <AiOutlineHeart className="text-[30px]"></AiOutlineHeart>
                 <div className="text-[10px]">WISHLIST</div>
-              </div>
+              </Link>
               <div className="">
                 <div
                   className="text-[black]  flex flex-col items-center"
