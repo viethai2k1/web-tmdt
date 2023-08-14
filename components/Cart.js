@@ -1,6 +1,6 @@
 import React from "react";
 import Product from "./Product";
-
+import { AiFillDelete } from "react-icons/ai";
 export default function Cart({ products, setClose }) {
   const getProduct = localStorage.getItem("Cart");
   const getProductJS = JSON.parse(getProduct);
@@ -70,14 +70,26 @@ function ProducCart({ prodCart }) {
 
   console.log(prodCart);
   return (
-    <div className="flex gap-[10px]">
-      <img className="w-[100px]" src={prodCart.product.image.src}></img>
-      <div>
-        <p>{prodCart.product.title}</p>
-        <div className="text-[gray]">Color: Blue</div>
-        <div className="text-[gray]">Size: M6</div>
+    <div className="flex flex-col gap-[15px]">
+      <div className="flex gap-[10px]">
+        <img className="w-[100px]" src={prodCart.product.image.src}></img>
+        <div>
+          <p>{prodCart.product.title}</p>
+          <div className="text-[gray]">Color: Blue</div>
+          <div className="text-[gray]">Size: M6</div>
+        </div>
+        <div className="font-bold">{prodCart.product.variants[0].price}</div>
       </div>
-      <div className="font-bold">{prodCart.product.variants[0].price}</div>
+      <div className="flex items-center gap-[10px] ml-[120px] mb-[30px]">
+        <div className="flex border-[1px] border-[#dcd8d8] w-[100px] rounded "> 
+           <button className="w-[50px] h-[40px]">-</button>
+           <button className="w-[50px] h-[40px]">1</button>
+           <button className="w-[50px] h-[40px]">+</button>
+        </div>
+        <div className="w-[40px] h-[40px] rounded border flex items-center justify-center">
+          <AiFillDelete className="text-[30px]"></AiFillDelete>
+        </div>
+      </div>
     </div>
   );
 }

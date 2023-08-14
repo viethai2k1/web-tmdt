@@ -152,7 +152,7 @@ export default function Header() {
                   <AiOutlineShoppingCart className="text-[30px] relative giohang"></AiOutlineShoppingCart>
                   <div className="w-[20px] h-[20px] rounded-[40px] bg-[#EF4444] absolute top-[10px] left-[1165px] text-[white] text-[12px] flex items-center justify-center">
                     {" "}
-                    0
+                    {totalProduct}
                   </div>
                   <div className="text-[10px]">CART</div>
                 </div>
