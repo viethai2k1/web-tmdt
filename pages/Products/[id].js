@@ -36,23 +36,34 @@ export default function id({ thamSo1, thamSo2 }) {
       });
 
       // Trong trường hợp chưa có giỏ hàng
-      if (!giohang) {
-        // Tạo giỏ hàng và lưu vào 1 mảng là phần tử là sản phẩm được click
-        localStorage.setItem("giohang", JSON.stringify([thamSo1]));
+      // if (!giohang) {
+      //   // Tạo giỏ hàng và lưu vào 1 mảng là phần tử là sản phẩm được click
+      //   localStorage.setItem("giohang", JSON.stringify([thamSo1]));
+      // }
+      // // Ngược lại đã có giỏ hàng
+      // else {
+      //   // lấy ra giỏ hàng dạng string
+      //   const giohangCuString = localStorage.getItem("giohang");
+
+      //   // Đổi giỏ hàng dạng string về dạng mảng
+      //   const giohangCuJson = JSON.parse(giohangCuString);
+
+      //   // Push sản phẩm đc click vào giỏ hàng cũ
+      //   giohangCuJson.push(thamSo1);
+
+      //   // Lưu giỏ hàng mới sau khi push sản phẩm vào localStorage
+      //   localStorage.setItem("giohang", JSON.stringify(giohangCuJson));
+
+      if (checkItem) {
+        sanPhamTraVe.quantity = checkItem.quantity + 1;
+      } else {
+        sanPhamTraVe.quantity = 1;
       }
-      // Ngược lại đã có giỏ hàng
-      else {
-        // lấy ra giỏ hàng dạng string
-        const giohangCuString = localStorage.getItem("giohang");
-
-        // Đổi giỏ hàng dạng string về dạng mảng
-        const giohangCuJson = JSON.parse(giohangCuString);
-
-        // Push sản phẩm đc click vào giỏ hàng cũ
-        giohangCuJson.push(thamSo1);
-
-        // Lưu giỏ hàng mới sau khi push sản phẩm vào localStorage
-        localStorage.setItem("giohang", JSON.stringify(giohangCuJson));
+      oddCartJSON = oddCartJSON.filter(
+        (item) => item.product.id !== sanPhamTraVe.product.id
+      );
+      oddCartJSON.push(sanPhamTraVe);
+      localStorage.setItem("Cart", JSON.stringify(oddCartJSON));
       }
       window.dispatchEvent(new Event("capNhatCart"));
     }
