@@ -168,7 +168,7 @@ export default function ed({ sanPhamsTraVe, name }) {
                   <div className="text-[14px] w-[230px] flex flex-col gap-[10px] mt-[10px]">
                     <div className="flex justify-between">
                       <div className="flex gap-[10px] items-center">
-                        <div className="w-[15px] h-[15px] border-[1px] border-[black]"></div>
+                        <input type="checkbox" className="w-[15px] h-[15px] border-[1px] border-[black]"></input>
                         <div>Adidas</div>
                       </div>
                       <div>3</div>
@@ -176,7 +176,7 @@ export default function ed({ sanPhamsTraVe, name }) {
 
                     <div className="flex justify-between">
                       <div className="flex gap-[10px] items-center">
-                        <div className="w-[15px] h-[15px] border-[1px] border-[black]"></div>
+                        <input type="checkbox" className="w-[15px] h-[15px] border-[1px] border-[black]"></input>
                         <div>Asice</div>
                       </div>
                       <div>1</div>
@@ -184,7 +184,7 @@ export default function ed({ sanPhamsTraVe, name }) {
 
                     <div className="flex justify-between">
                       <div className="flex gap-[10px] items-center">
-                        <div className="w-[15px] h-[15px] border-[1px] border-[black]"></div>
+                        <input type="checkbox" className="w-[15px] h-[15px] border-[1px] border-[black]"></input>
                         <div>Brooks</div>
                       </div>
                       <div>1</div>
@@ -192,7 +192,7 @@ export default function ed({ sanPhamsTraVe, name }) {
 
                     <div className="flex justify-between">
                       <div className="flex gap-[10px] items-center">
-                        <div className="w-[15px] h-[15px] border-[1px] border-[black]"></div>
+                        <input type="checkbox" className="w-[15px] h-[15px] border-[1px] border-[black]"></input>
                         <div>New Balance</div>
                       </div>
                       <div>2</div>
@@ -200,7 +200,7 @@ export default function ed({ sanPhamsTraVe, name }) {
 
                     <div className="flex justify-between">
                       <div className="flex gap-[10px] items-center">
-                        <div className="w-[15px] h-[15px] border-[1px] border-[black]"></div>
+                        <input type="checkbox" className="w-[15px] h-[15px] border-[1px] border-[black]"></input>
                         <div>Nike</div>
                       </div>
                       <div>1</div>
@@ -208,7 +208,7 @@ export default function ed({ sanPhamsTraVe, name }) {
 
                     <div className="flex justify-between">
                       <div className="flex gap-[10px] items-center">
-                        <div className="w-[15px] h-[15px] border-[1px] border-[black]"></div>
+                        <input type="checkbox" className="w-[15px] h-[15px] border-[1px] border-[black]"></input>
                         <div>Reebok</div>
                       </div>
                       <div>1</div>
