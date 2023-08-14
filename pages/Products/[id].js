@@ -22,6 +22,20 @@ export default function id({ thamSo1, thamSo2 }) {
   const themvaogiohang = (thamSo1) => {
     const giohang = localStorage.getItem("giohang");
 
+    const CheckCart = localStorage.getItem("Cart");
+    
+    //kiem tra gio hang da ton tai hay chua
+    if (!CheckCart) {
+      sanPhamTraVe.quantity = 1;
+      localStorage.setItem("Cart", JSON.stringify([sanPhamTraVe]));
+    } else {
+      const oddCart = localStorage.getItem("Cart");
+      let oddCartJSON = JSON.parse(oddCart);
+      const checkItem = oddCartJSON.find((item) => {
+        return item.product.id === sanPhamTraVe.product.id;
+      });
+
+
     // Trong trường hợp chưa có giỏ hàng
     if (!giohang) {
       // Tạo giỏ hàng và lưu vào 1 mảng là phần tử là sản phẩm được click
@@ -393,3 +407,4 @@ export const getServerSideProps = async (context) => {
     },
   };
 };
+}
