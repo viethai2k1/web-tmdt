@@ -18,6 +18,7 @@ import Cart from "./Cart";
 export default function Header() {
   const [yeuthich, setyeuthich] = useState(false);
   const [thamSo3, setThamSo3] = useState([]);
+  const [totalProduct, setTotalProduct] = useState(0);
 
   useEffect(() => {
     fetch("/api/all-product")
@@ -25,6 +26,23 @@ export default function Header() {
       .then((res) => {
         setThamSo3(res.products);
       });
+  }, []);
+
+  useEffect(() => {
+    const handleUpdateTotal = () => {
+      const cartRaw = localStorage.getItem("Cart") ?? "[]";
+      const cart = JSON.parse(cartRaw);
+      console.log(cart);
+      let total = 0;
+
+      for (let i = 0; i < cart.length; i++) {
+        total += cart[i].quantity;
+      }
+      setTotalProduct(total);
+    };
+
+    window.addEventListener("capNhatCart", handleUpdateTotal);
+    handleUpdateTotal();
   }, []);
 
   return (
@@ -116,11 +134,17 @@ export default function Header() {
                 <AiOutlineUser className="text-[30px]"></AiOutlineUser>
                 <div className="text-[10px]">ACCOUNT</div>
               </Link>
-              <Link href={"/compare/compare_1"} className="text-[black] flex flex-col items-center">
+              <Link
+                href={"/compare/compare_1"}
+                className="text-[black] flex flex-col items-center"
+              >
                 <BsArrowLeftRight className="text-[30px]"></BsArrowLeftRight>
                 <div className="text-[10px]">COMPARE</div>
               </Link>
-              <Link href={"/wishlist"} className="text-[black] flex flex-col items-center">
+              <Link
+                href={"/wishlist"}
+                className="text-[black] flex flex-col items-center"
+              >
                 <AiOutlineHeart className="text-[30px]"></AiOutlineHeart>
                 <div className="text-[10px]">WISHLIST</div>
               </Link>
@@ -133,8 +157,7 @@ export default function Header() {
                 >
                   <AiOutlineShoppingCart className="text-[30px] relative giohang"></AiOutlineShoppingCart>
                   <div className="w-[20px] h-[20px] rounded-[40px] bg-[#EF4444] absolute top-[10px] left-[1165px] text-[white] text-[12px] flex items-center justify-center">
-                    {" "}
-                    0
+                    {totalProduct}
                   </div>
                   <div className="text-[10px]">CART</div>
                 </div>
