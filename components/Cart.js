@@ -2,6 +2,8 @@ import React from "react";
 import Product from "./Product";
 
 export default function Cart({ products, setClose }) {
+  const getProduct = localStorage.getItem("Cart");
+  const getProductJS = JSON.parse(getProduct);
   return (
     <div
       className="bg-[white] w-[485px] h-[100%] fixed top-0 right-0 z-10 overflow-y-auto"
@@ -21,8 +23,8 @@ export default function Cart({ products, setClose }) {
             Đóng
           </buton>
         </div>
-        {true ? (
-          <ProducCart></ProducCart>
+        {getProductJS?.length > 0 ? (
+          getProductJS.map((prodCart) => <ProducCart prodCart={prodCart}></ProducCart>)
         ) : (
           <div>
             {" "}
@@ -52,16 +54,19 @@ export default function Cart({ products, setClose }) {
     </div>
   );
 }
-function ProducCart() {
+function ProducCart({prodCart}) {
+
+  
+  console.log(prodCart);
   return (
     <div className="flex gap-[10px]">
-      <img className="w-[100px]" src="/img/anh25.webp"></img>
+      <img className="w-[100px]" src={prodCart.product.image.src}></img>
       <div>
-        <p>Men's New Balance Two WXY Basketball Shoes</p>
+        <p>{prodCart.product.title}</p>
         <div className="text-[gray]">Color: Blue</div>
         <div className="text-[gray]">Size: M6</div>
       </div>
-      <div className="font-bold">$200.00</div>
+      <div className="font-bold">{prodCart.product.variants[0].price}</div>
     </div>
   );
 }
