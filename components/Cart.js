@@ -24,7 +24,9 @@ export default function Cart({ products, setClose }) {
           </buton>
         </div>
         {getProductJS?.length > 0 ? (
-          getProductJS.map((prodCart) => <ProducCart prodCart={prodCart}></ProducCart>)
+          getProductJS.map((prodCart) => (
+            <ProducCart prodCart={prodCart}></ProducCart>
+          ))
         ) : (
           <div>
             {" "}
@@ -54,9 +56,18 @@ export default function Cart({ products, setClose }) {
     </div>
   );
 }
-function ProducCart({prodCart}) {
+function ProducCart({ prodCart }) {
+  const xuLyXoaSanPham = (idXoa) => {
+    const getProduct = localStorage.getItem("Cart") ?? "[]";
+    const getProductJS = JSON.parse(getProduct);
 
-  
+    const newCart = getProductJS.filter((item) => item.product.id !== idXoa);
+
+    localStorage.setItem("Cart", JSON.stringify(newCart));
+
+    window.dispatchEvent(new Event("capNhatCart"));
+  };
+
   console.log(prodCart);
   return (
     <div className="flex gap-[10px]">
