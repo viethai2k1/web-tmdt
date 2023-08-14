@@ -27,6 +27,23 @@ export default function Header() {
       });
   }, []);
 
+  useEffect(() => {
+    const handleUpdateTotal = () => {
+      const cartRaw = localStorage.getItem("Cart") ?? "[]";
+      const cart = JSON.parse(cartRaw);
+      console.log(cart);
+      let total = 0;
+
+      for (let i = 0; i < cart.length; i++) {
+        total += cart[i].quantity;
+      }
+      setTotalProduct(total);
+    };
+
+    window.addEventListener("capNhatCart", handleUpdateTotal);
+    handleUpdateTotal();
+  }, []);
+
   return (
     <div>
       <div className="h-[80px] bg-[#FAA618] flex items-center justify-center gap-[35px]  ">
