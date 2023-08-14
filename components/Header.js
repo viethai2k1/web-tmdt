@@ -18,6 +18,7 @@ import Cart from "./Cart";
 export default function Header() {
   const [yeuthich, setyeuthich] = useState(false);
   const [thamSo3, setThamSo3] = useState([]);
+  const [totalProduct, setTotalProduct] = useState(0);
 
   useEffect(() => {
     fetch("/api/all-product")
