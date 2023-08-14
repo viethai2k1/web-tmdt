@@ -19,28 +19,33 @@ export default function id({ thamSo1, thamSo2 }) {
   const [thich, setThich] = useState(false);
   const [addtobag, setaddtobag] = useState(false);
 
-  const themvaogiohang = (thamSo1) => {
-    const giohang = localStorage.getItem("giohang");
+  const themvaogiohang = (sanPhamTraVe) => {
+    const CheckCart = localStorage.getItem("Cart");
+    //kiem tra gio hang da ton tai hay chua
+    if (!CheckCart) {
+      sanPhamTraVe.quantity = 1;
+      localStorage.setItem("Cart", JSON.stringify([sanPhamTraVe]));
+    } else {
+      const oddCart = localStorage.getItem("Cart");
+      let oddCartJSON = JSON.parse(oddCart);
+      const checkItem = oddCartJSON.find((item) => {
+        return item.product.id === sanPhamTraVe.product.id;
+      });
 
-    // Trong trường hợp chưa có giỏ hàng
-    if (!giohang) {
-      // Tạo giỏ hàng và lưu vào 1 mảng là phần tử là sản phẩm được click
-      localStorage.setItem("giohang", JSON.stringify([thamSo1]));
+      //kiem tra san pham da ton tai hay chua
+      if (checkItem) {
+        sanPhamTraVe.quantity = checkItem.quantity + 1;
+      } else {
+        sanPhamTraVe.quantity = 1;
+      }
+      oddCartJSON = oddCartJSON.filter(
+        (item) => item.product.id !== sanPhamTraVe.product.id
+      );
+      oddCartJSON.push(sanPhamTraVe);
+      localStorage.setItem("Cart", JSON.stringify(oddCartJSON));
     }
-    // Ngược lại đã có giỏ hàng
-    else {
-      // lấy ra giỏ hàng dạng string
-      const giohangCuString = localStorage.getItem("giohang");
 
-      // Đổi giỏ hàng dạng string về dạng mảng
-      const giohangCuJson = JSON.parse(giohangCuString);
-
-      // Push sản phẩm đc click vào giỏ hàng cũ
-      giohangCuJson.push(thamSo1);
-
-      // Lưu giỏ hàng mới sau khi push sản phẩm vào localStorage
-      localStorage.setItem("giohang", JSON.stringify(giohangCuJson));
-    }
+    window.dispatchEvent(new Event("capNhatCart"));
   };
 
   return thamSo1.product ? (
